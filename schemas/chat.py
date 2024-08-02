@@ -1,11 +1,6 @@
-import logging
-import os
-import pandas as pd
-from pydantic import BaseModel, Field
 from typing import Optional
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-from dotenv import load_dotenv
+
+from pydantic import BaseModel
 
 
 class Interaction(BaseModel):
