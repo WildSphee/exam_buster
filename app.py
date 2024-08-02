@@ -41,9 +41,9 @@ async def clear_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     user_message: str = update.message.text
     bot_response: str = "Context cleared"
     user: User = update.message.from_user
+    _log_interaction(user, user_message, bot_response)
     _clear_chat_history(user)
 
-    _log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
 
@@ -52,7 +52,7 @@ async def echo(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     user: User = update.message.from_user
     user_message: str = update.message.text
 
-    chat_history = _get_chat_history(user.id)
+    chat_history = _get_chat_history(str(user.id))
     chat_history.append({"role": "user", "content": user_message})
     bot_response: str = call_openai(chat_history)
 

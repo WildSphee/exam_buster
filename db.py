@@ -27,21 +27,22 @@ def _log_interaction(user: User, user_message: str, bot_response: str) -> None:
         df_new.to_csv(CSV_FILE, mode="w", header=True, index=False)
 
 
-def _get_chat_history(user_id: int) -> list[dict[str, str]]:
+def _get_chat_history(user_id: str) -> list[dict[str, str]]:
     if not os.path.isfile(CSV_FILE):
         return []
 
     df = pd.read_csv(CSV_FILE)
-    user_history = df[df["user_id"] == user_id]
+    df["user_id"] = df["user_id"].astype(str)
+    user_history = df[df["user_id"] == str(user_id)]
 
-    formatted_history = []
+    his = []
     for _, row in user_history.iterrows():
-        formatted_history.append({"role": "user", "content": row["user_message"] or ""})
-        formatted_history.append(
+        his.append({"role": "user", "content": row["user_message"] or ""})
+        his.append(
             {"role": "assistant", "content": row["bot_response"] or ""}
         )
 
-    return formatted_history
+    return his
 
 
 def _clear_chat_history(user: User) -> None:
@@ -49,6 +50,7 @@ def _clear_chat_history(user: User) -> None:
         return
 
     df = pd.read_csv(CSV_FILE)
-    # Replace the username with "cleared_<username>"
-    df.loc[df["user_id"] == user.id, "user_id"] = f"cleared_{user.id}"
+    df["user_id"] = df["user_id"].astype(str)
+    # Replace the user.id with "cleared_<user.id>"
+    df.loc[df["user_id"] == str(user.id), "user_id"] = f"cleared_{user.id}"
     df.to_csv(CSV_FILE, index=False)
