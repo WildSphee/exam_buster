@@ -1,1 +1,1 @@
-Food recommendator built on telegram
+Goose bot built on telegram
