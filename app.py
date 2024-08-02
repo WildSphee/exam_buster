@@ -12,7 +12,7 @@ from telegram.ext import (
     filters,
 )
 
-from schemas import Interaction
+from chatbot import call_openai
 
 # Load environment variables from .env file
 load_dotenv()
@@ -32,14 +32,14 @@ CSV_FILE = "user_data.csv"
 def log_interaction(user: User, user_message: str, bot_response: str) -> None:
     df_new = pd.DataFrame(
         [
-            Interaction(
-                user_id=user.id,
-                username=user.username,
-                first_name=user.first_name,
-                last_name=user.last_name,
-                user_message=user_message,
-                bot_response=bot_response,
-            ).model_dump()
+            {
+                "user_id": user.id,
+                "username": user.username,
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "user_message": user_message,
+                "bot_response": bot_response,
+            }
         ]
     )
 
@@ -70,9 +70,10 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message and log user info."""
+
     user: User = update.message.from_user
     user_message: str = update.message.text
-    bot_response: str = update.message.text
+    bot_response: str = call_openai(user_message)
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
