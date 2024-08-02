@@ -1,6 +1,5 @@
 import logging
 import os
-
 import pandas as pd
 from dotenv import load_dotenv
 from telegram import Update, User
@@ -50,6 +49,22 @@ def log_interaction(user: User, user_message: str, bot_response: str) -> None:
         df_new.to_csv(CSV_FILE, mode="w", header=True, index=False)
 
 
+def get_chat_history(user_id: int) -> list[dict[str, str]]:
+    if not os.path.isfile(CSV_FILE):
+        return []
+
+    df = pd.read_csv(CSV_FILE)
+    user_history = df[df['user_id'] == user_id]
+
+    formatted_history = []
+    for _, row in user_history.iterrows():
+        if pd.notna(row['bot_response']):  # Check if bot_response is not NaN
+            formatted_history.append({"role": "assistant", "content": row['bot_response']})
+        formatted_history.append({"role": "user", "content": row['user_message']})
+
+    return formatted_history
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued and log user info."""
     user: User = update.message.from_user
@@ -70,10 +85,13 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message and log user info."""
-
     user: User = update.message.from_user
     user_message: str = update.message.text
-    bot_response: str = call_openai(user_message)
+
+    chat_history = get_chat_history(user.id)
+    chat_history.append({"role": "user", "content": user_message})
+    bot_response: str = call_openai(chat_history)
+
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
@@ -86,7 +104,7 @@ def main() -> None:
 
     application = ApplicationBuilder().token(TOKEN).build()
 
-    # add commands
+    # Add commands
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
