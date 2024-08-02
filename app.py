@@ -10,15 +10,24 @@ from telegram.ext import (
     MessageHandler,
     filters,
 )
+from telegram import (
+    Update,
+    User,
+    ReplyKeyboardMarkup,
+    KeyboardButton
+)
 
 from chatbots.openai import call_openai
 from db import _clear_chat_history, _get_chat_history, _log_interaction
-
-# Load environment variables from .env file
 load_dotenv()
 
-# Get the bot token from environment variable
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+keyboard = [
+    [KeyboardButton("/clear")]
+]
+reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -54,10 +63,10 @@ async def echo(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
 
     chat_history = _get_chat_history(str(user.id))
     chat_history.append({"role": "user", "content": user_message})
-    bot_response: str = call_openai(chat_history)
+    bot_response: str = call_openai(chat_history, user)
 
     _log_interaction(user, user_message, bot_response)
-    await update.message.reply_text(bot_response)
+    await update.message.reply_text(bot_response, reply_markup=reply_markup)
 
 
 def main() -> None:
