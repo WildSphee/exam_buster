@@ -22,8 +22,8 @@ TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
-
 logger = logging.getLogger(__name__)
+
 
 CSV_FILE = "user_data.csv"
 
@@ -58,9 +58,8 @@ def get_chat_history(user_id: int) -> list[dict[str, str]]:
 
     formatted_history = []
     for _, row in user_history.iterrows():
-        if pd.notna(row['bot_response']):  # Check if bot_response is not NaN
-            formatted_history.append({"role": "assistant", "content": row['bot_response']})
-        formatted_history.append({"role": "user", "content": row['user_message']})
+        formatted_history.append({"role": "user", "content": row['user_message'] or ""})
+        formatted_history.append({"role": "assistant", "content": row['bot_response'] or ""})
 
     return formatted_history
 
@@ -107,6 +106,7 @@ def main() -> None:
     # Add commands
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("clear", help_command))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     application.run_polling()
