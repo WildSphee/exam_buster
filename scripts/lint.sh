@@ -1,29 +1,29 @@
 #!/bin/sh
 
-in_place_flag=false
+check=false
 
-if [ -z "$1" ] || [ "$1" = "--in-place" ] ; then
+if [ -z "$1" ] || [ "$1" = "--check" ] ; then
   echo "Defaulting to apply on 'root'"
   FPATH="."
-  if [ "$1" = "--in-place" ]; then
-    in_place_flag=true
+  if [ "$1" = "--check" ]; then
+    check=true
   fi
 else 
   FPATH=$1
-  if [ "$2" = "--in-place" ]; then
-    in_place_flag=true
+  if [ "$2" = "--check" ]; then
+    check=true
   fi
 fi
 
 echo $FPATH
-echo $in_place_flag
+echo $check
 
-if "$in_place_flag"; then
-  ruff format $FPATH
-  ruff check $FPATH --fix
-  ruff check $FPATH --select I --fix
-else
+if "$check"; then
   ruff format $FPATH --check
   mypy $FPATH
   ruff check $FPATH
+else
+  ruff format $FPATH
+  ruff check $FPATH --fix
+  ruff check $FPATH --select I --fix
 fi
