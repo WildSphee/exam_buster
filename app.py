@@ -3,7 +3,7 @@ import os
 
 import pandas as pd
 from dotenv import load_dotenv
-from telegram import Update
+from telegram import Update, User
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -29,19 +29,19 @@ logger = logging.getLogger(__name__)
 CSV_FILE = "user_data.csv"
 
 
-def log_interaction(user, user_message, bot_response):
-    # Create an instance of the Interaction model
-    interaction = Interaction(
-        user_id=user.id,
-        username=user.username,
-        first_name=user.first_name,
-        last_name=user.last_name,
-        user_message=user_message,
-        bot_response=bot_response,
+def log_interaction(user: User, user_message: str, bot_response: str) -> None:
+    df_new = pd.DataFrame(
+        [
+            Interaction(
+                user_id=user.id,
+                username=user.username,
+                first_name=user.first_name,
+                last_name=user.last_name,
+                user_message=user_message,
+                bot_response=bot_response,
+            ).model_dump()
+        ]
     )
-
-    # Convert the pydantic model to a DataFrame
-    df_new = pd.DataFrame([interaction.model_dump()])
 
     # Append the new interaction to the existing CSV file
     if os.path.isfile(CSV_FILE):
@@ -52,27 +52,27 @@ def log_interaction(user, user_message, bot_response):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued and log user info."""
-    user = update.message.from_user
-    user_message = update.message.text
-    bot_response = "Hi!"
+    user: User = update.message.from_user
+    user_message: str = update.message.text
+    bot_response: str = "Hi!"
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued and log user info."""
-    user = update.message.from_user
-    user_message = update.message.text
-    bot_response = "Help!"
+    user: User = update.message.from_user
+    user_message: str = update.message.text
+    bot_response: str = "Help!"
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message and log user info."""
-    user = update.message.from_user
-    user_message = update.message.text
-    bot_response = update.message.text
+    user: User = update.message.from_user
+    user_message: str = update.message.text
+    bot_response: str = update.message.text
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
@@ -88,8 +88,6 @@ def main() -> None:
     # add commands
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
-
-    # on noncommand i.e message - echo the message on Telegram
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     application.run_polling()

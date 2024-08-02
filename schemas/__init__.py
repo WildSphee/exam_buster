@@ -1,3 +1,3 @@
-from chat import Interaction
+from .chat import Interaction
 
 __all__ = ["Interaction"]
