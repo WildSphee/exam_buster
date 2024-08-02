@@ -38,9 +38,7 @@ def _get_chat_history(user_id: str) -> list[dict[str, str]]:
     his = []
     for _, row in user_history.iterrows():
         his.append({"role": "user", "content": row["user_message"] or ""})
-        his.append(
-            {"role": "assistant", "content": row["bot_response"] or ""}
-        )
+        his.append({"role": "assistant", "content": row["bot_response"] or ""})
 
     return his
 

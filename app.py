@@ -2,7 +2,7 @@ import logging
 import os
 
 from dotenv import load_dotenv
-from telegram import Update, User
+from telegram import KeyboardButton, ReplyKeyboardMarkup, Update, User
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -10,22 +10,15 @@ from telegram.ext import (
     MessageHandler,
     filters,
 )
-from telegram import (
-    Update,
-    User,
-    ReplyKeyboardMarkup,
-    KeyboardButton
-)
 
 from chatbots.openai import call_openai
 from db import _clear_chat_history, _get_chat_history, _log_interaction
+
 load_dotenv()
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-keyboard = [
-    [KeyboardButton("/clear")]
-]
+keyboard = [[KeyboardButton("/clear")]]
 reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
 
