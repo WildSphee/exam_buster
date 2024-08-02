@@ -1,9 +1,8 @@
 import logging
 import os
 
-import pandas as pd
 from dotenv import load_dotenv
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, User
+from telegram import Update, User
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,

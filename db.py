@@ -1,19 +1,9 @@
-import logging
 import os
 
 import pandas as pd
-from dotenv import load_dotenv
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, User
-from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    ContextTypes,
-    MessageHandler,
-    filters,
-)
+from telegram import User
 
-from chatbots.openai import call_openai
-CSV_FILE = "user_data.csv"
+CSV_FILE = "chat_history/user_data.csv"
 
 
 def _log_interaction(user: User, user_message: str, bot_response: str) -> None:
