@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "foodgpt"
+version = "0.1.0"
+description = "A food recommendator for HK and Singapore restaurants built on telegram"
+authors = ["Reagan <rrr.chanhiulok@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-telegram-bot = "^21.4"
+requests = "^2.32.3"
+pandas = "^2.2.2"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
