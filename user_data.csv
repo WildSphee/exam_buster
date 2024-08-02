@@ -1,9 +1,0 @@
-user_id,username,first_name,last_name,user_message,bot_response
-cleared_1624490023,reagan_c,Reagan,,Start,"Hello! I'm Goose Bot, your friendly chatbot. How can I assist you today?"
-cleared_1624490023,reagan_c,Reagan,,Start,I'm here and ready to chat! What would you like to know or talk about?
-cleared_1624490023,reagan_c,Reagan,,/start,"To start, simply type anything~"
-cleared_1624490023,reagan_c,Reagan,,Hi,Hello! How's your day going?
-cleared_1624490023,reagan_c,Reagan,,Repeat your last message,Hello! How's your day going?
-cleared_1624490023,reagan_c,Reagan,,Repeat your last message,Hello! How's your day going?
-1624490023,reagan_c,Reagan,,/clear,Context cleared
-1624490023,reagan_c,Reagan,,Repeat your last message,I don't have any previous messages to repeat. How can I assist you today?
