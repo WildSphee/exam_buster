@@ -1,88 +1,9 @@
 user_id,username,first_name,last_name,user_message,bot_response
-1624490023,reagan_c,Reagan,,Hey,Hey
-1624490023,reagan_c,Reagan,,Whats my last name,Whats my last name
-1624490023,reagan_c,Reagan,,Whats up,
-1624490023,reagan_c,Reagan,,Whats up,"ChatCompletionMessage(content=""Hello! I'm here to help you with any questions or information you need. What’s on your mind?"", role='assistant', function_call=None, tool_calls=None)"
-1624490023,reagan_c,Reagan,,/help,Help!
-1624490023,reagan_c,Reagan,,/start,Hi!
-1624490023,reagan_c,Reagan,,/start,Hi!
-1624490023,reagan_c,Reagan,,Fr,"ChatCompletionMessage(content='It looks like your message got cut off. How can I assist you today?', role='assistant', function_call=None, tool_calls=None)"
-1624490023,reagan_c,Reagan,,Hihi,Hello! How can I assist you today?
-1624490023,reagan_c,Reagan,,Tell me about Singapore,"Singapore is a city-state and island country located in Southeast Asia. It is situated at the southern tip of the Malay Peninsula, separated from Malaysia by the Johor Strait to the north and from the Indonesian Riau Islands to the south. Here are some key aspects of Singapore:
-
-### Geography
-- **Size**: Singapore is one of the smallest countries in the world, with a total land area of approximately 728.6 square kilometers (281.3 square miles).
-- **Islands**: Singapore comprises the main island and about 63 smaller islands, some of which are uninhabited.
-- **Climate**: The country has a tropical rainforest climate, characterized by high humidity, temperatures averaging around 25°C to 31°C (77°F to 88°F), and frequent rainfall throughout the year.
-
-### History
-- **Colonial Era**: Singapore was founded as a British trading post in 1819 by Sir Stamford Raffles. It became a significant port and naval base during the British colonial period.
-- **World War II**: The Japanese occupied Singapore from 1942 to 1945 during World War II. The experience led to a rise in nationalist sentiments.
-- **Independence**: Singapore became a self-governing state in 1959 and joined the Federation of Malaysia in 1963. However, it separated from Malaysia and became an independent republic on August 9, 1965.
-
-### Government and Politics
-- **Political System**: Singapore has a parliamentary system of government. The People's Action Party (PAP) has been the dominant political party since the country's independence.
-- **Leadership**: The President serves as the head of state, while the Prime Minister is the head of government. 
-
-### Economy
-- **Economic Model**: Singapore operates a highly developed and free-market economy. It is known for its efficient regulatory framework, lack of corruption, and pro-business policies.
-- **Key Industries**: Major sectors include finance, manufacturing, trade, and tourism. The Port of Singapore is one of the busiest in the world.
-- **Global Hub**: The country is a significant financial hub and serves as a major gateway for trade in Asia.
-
-### Culture
-- **Multicultural Society**: Singapore is a melting pot of cultures, with a population that includes major ethnic groups such as Chinese, Malays, Indians, and others. Official languages include English, Mandarin, Malay, and Tamil.
-- **Festivals and Cuisine**: Diverse cultural festivals are celebrated, including Chinese New Year, Hari Raya Puasa, Deepavali, and Christmas. Singaporean cuisine features a mix of Malay, Chinese, Indian, and Western influences, with popular dishes including Hainanese chicken rice, laksa, and chili crab.
-
-### Education and Healthcare
-- **Education System**: Singapore is known for its strong education system, which consistently ranks highly in global assessments. The country emphasizes STEM (science, technology, engineering, and mathematics) education.
-- **Healthcare**: The healthcare system in Singapore is highly regarded, providing universal access to healthcare services through a mixed system of public and private providers.
-
-### Tourism
-- **Attractions**: Key tourist attractions include Marina Bay Sands, Gardens by the Bay, the Singapore Zoo, Sentosa Island, and the iconic Merlion statue.
-- **Shopping and Dining**: Singapore is famous for its shopping districts like Orchard Road and its diverse culinary scene, including hawker centers that offer affordable local eats.
-
-### Environment and Sustainability
-- **Green City**: Singapore is often referred to as a ""Garden City"" due to its extensive urban greenery and parks. The government has made significant efforts to promote sustainability and environmental conservation.
-
-Overall, Singapore is known for its high standard of living, vibrant culture, and robust economy. It has positioned itself as a global city and a key player in international trade and finance."
-1624490023,reagan_c,Reagan,,Repeat what u said in Chinese,请问您希望我重复什么内容？
-1624490023,reagan_c,Reagan,,Hi,Hey! What’s up?
-1624490023,reagan_c,Reagan,,What was my last message,"Your last message was ""Hi."""
-1624490023,reagan_c,Reagan,,Wow,"Your last message was ""Wow."""
-1624490023,reagan_c,Reagan,,You are pretty amazing,Thanks! You're awesome too! What do you want to talk about?
-1624490023,reagan_c,Reagan,,Tell me what are our last few messages in an order,"1. ""You are pretty amazing.""
-2. ""Wow.""
-3. ""Hi.""
-4. ""What was my last message?"" 
-5. ""What’s up?"""
-1624490023,reagan_c,Reagan,,What about your messages,"Sure! Here are some of my recent messages:
-
-1. ""Thanks! You're awesome too! What do you want to talk about?""
-2. ""I'm here to help you with any questions or information you need.""
-3. ""Hello! How can I assist you today?""
-4. ""Hi!"" 
-5. ""It looks like your message got cut off. How can I assist you today?"" 
-
-Let me know if you need anything else!"
-1624490023,reagan_c,Reagan,,Tell me about telegram,"Telegram is a cloud-based messaging app known for its speed and security. Key features include:
-
-1. **Messaging**: Send text messages, voice messages, photos, videos, and files of any type.
-2. **Security**: Offers end-to-end encryption for secret chats and self-destructing messages.
-3. **Groups**: Create groups with up to 200,000 members and channels for broadcasting messages to unlimited subscribers.
-4. **Bots**: Supports the use of bots to automate tasks and provide various services.
-5. **Cross-Platform**: Available on various platforms including iOS, Android, Windows, and web browsers.
-6. **Stickers and GIFs**: Custom stickers and GIFs enhance communication.
-7. **Privacy Features**: Options to hide phone numbers and set last seen visibility.
-
-Overall, Telegram is popular for its user-friendly interface and robust privacy features."
-1624490023,reagan_c,Reagan,,Repeat what u said in Chinese,"电报是一个基于云的消息应用程序，以其速度和安全性而闻名。主要功能包括：
-
-1. **消息**：发送文本消息、语音消息、照片、视频以及任何类型的文件。
-2. **安全性**：为秘密聊天提供端到端加密和自毁消息。
-3. **群组**：创建最多200,000名成员的群组以及频道，用于向无限的订阅者广播消息。
-4. **机器人**：支持使用机器人来自动化任务和提供各种服务。
-5. **跨平台**：可在iOS、Android、Windows和网页浏览器等各种平台上使用。
-6. **贴纸和GIF**：自定义贴纸和GIF增强了沟通效果。
-7. **隐私功能**：可以隐藏电话号码并设置最后在线状态的可见性。
-
-总的来说，电报因其用户友好的界面和强大的隐私功能而受到欢迎。"
+cleared_1624490023,reagan_c,Reagan,,Start,"Hello! I'm Goose Bot, your friendly chatbot. How can I assist you today?"
+cleared_1624490023,reagan_c,Reagan,,Start,I'm here and ready to chat! What would you like to know or talk about?
+cleared_1624490023,reagan_c,Reagan,,/start,"To start, simply type anything~"
+cleared_1624490023,reagan_c,Reagan,,Hi,Hello! How's your day going?
+cleared_1624490023,reagan_c,Reagan,,Repeat your last message,Hello! How's your day going?
+cleared_1624490023,reagan_c,Reagan,,Repeat your last message,Hello! How's your day going?
+1624490023,reagan_c,Reagan,,/clear,Context cleared
+1624490023,reagan_c,Reagan,,Repeat your last message,I don't have any previous messages to repeat. How can I assist you today?
