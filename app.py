@@ -12,7 +12,7 @@ from telegram.ext import (
     filters,
 )
 
-from chatbot import call_openai
+from chatbots.openai import call_openai
 
 # Load environment variables from .env file
 load_dotenv()
@@ -54,7 +54,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued and log user info."""
     user: User = update.message.from_user
     user_message: str = update.message.text
-    bot_response: str = "Hi!"
+    bot_response: str = "To start, simply type anything~"
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
@@ -63,7 +63,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     """Send a message when the command /help is issued and log user info."""
     user: User = update.message.from_user
     user_message: str = update.message.text
-    bot_response: str = "Help!"
+    bot_response: str = "This is a simple telegram chatbot, type anything to start!"
     log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
