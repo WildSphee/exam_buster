@@ -4,6 +4,15 @@ import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from dotenv import load_dotenv
+import logging
+import os
+import pandas as pd
+from pydantic import BaseModel, Field
+from typing import Optional
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+from dotenv import load_dotenv
+from schemas import Interaction
 
 # Load environment variables from .env file
 load_dotenv()
@@ -11,7 +20,6 @@ load_dotenv()
 # Get the bot token from environment variable
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
-# Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -22,13 +30,24 @@ logger = logging.getLogger(__name__)
 CSV_FILE = 'user_data.csv'
 
 def log_interaction(user, user_message, bot_response):
-    file_exists = os.path.isfile(CSV_FILE)
-    with open(CSV_FILE, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        if not file_exists:
-            # Write the header if the file does not exist
-            writer.writerow(['user_id', 'username', 'first_name', 'last_name', 'user_message', 'bot_response'])
-        writer.writerow([user.id, user.username, user.first_name, user.last_name, user_message, bot_response])
+    # Create an instance of the Interaction model
+    interaction = Interaction(
+        user_id=user.id,
+        username=user.username,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        user_message=user_message,
+        bot_response=bot_response
+    )
+
+    # Convert the pydantic model to a DataFrame
+    df_new = pd.DataFrame([interaction.model_dump()])
+
+    # Append the new interaction to the existing CSV file
+    if os.path.isfile(CSV_FILE):
+        df_new.to_csv(CSV_FILE, mode='a', header=False, index=False)
+    else:
+        df_new.to_csv(CSV_FILE, mode='w', header=True, index=False)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued and log user info."""
