@@ -4,23 +4,23 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from telegram import User
 
-from .prompt import default_chatbot_prompt
-
 # Load environment variables from a .env file
 load_dotenv()
 
 
 def call_openai(
-    query: List[Dict[str, str]], user: User, prompt: str = default_chatbot_prompt
+    history: List[Dict[str, str]], user: User, query: str, prompt: str
 ) -> str:
     client = OpenAI()
 
-    messages = [
+    messages = history + [
         {
             "role": "system",
-            "content": prompt.format(username=user.first_name or "<not provided>"),
+            "content": prompt.format(
+                username=user.first_name or "<not provided>", query=query
+            ),
         },
-    ] + query
+    ]
 
     completion = client.chat.completions.create(
         model="gpt-4o-mini",

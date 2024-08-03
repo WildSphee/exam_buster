@@ -54,3 +54,11 @@ class DB:
         # Replace the user.id with "cleared_<user.id>"
         df.loc[df["user_id"] == str(user.id), "user_id"] = f"cleared_{user.id}"
         df.to_csv(self.CSV_FILE, index=False)
+
+    def _check_user_messages(self, user: User) -> int:
+        """Check how many total messages the user has sent"""
+        df = pd.read_csv(self.CSV_FILE)
+
+        filtered_df = df[df["user_id"] == str(user.id)]
+
+        return filtered_df.shape[0]

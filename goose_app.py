@@ -13,6 +13,7 @@ from telegram.ext import (
 
 from db import DB
 from llms.openai import call_openai
+from llms.prompt import default_chatbot_prompt
 
 load_dotenv()
 
@@ -56,8 +57,9 @@ async def echo(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     user_message: str = update.message.text
 
     chat_history = db._get_chat_history(str(user.id))
-    chat_history.append({"role": "user", "content": user_message})
-    bot_response: str = call_openai(chat_history, user)
+    bot_response: str = call_openai(
+        chat_history, user, user_message, default_chatbot_prompt
+    )
 
     db._log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response, reply_markup=reply_markup)
