@@ -4,13 +4,13 @@ import pandas as pd
 from telegram import User
 
 
-
 class DB:
-
     def __init__(self, csv_file: str):
         self.CSV_FILE: str = csv_file
 
-    def _log_interaction(self,user: User, user_message: str, bot_response: str) -> None:
+    def _log_interaction(
+        self, user: User, user_message: str, bot_response: str
+    ) -> None:
         df_new = pd.DataFrame(
             [
                 {
@@ -30,7 +30,6 @@ class DB:
         else:
             df_new.to_csv(self.CSV_FILE, mode="w", header=True, index=False)
 
-
     def _get_chat_history(self, user_id: str) -> list[dict[str, str]]:
         if not os.path.isfile(self.CSV_FILE):
             return []
@@ -45,7 +44,6 @@ class DB:
             his.append({"role": "assistant", "content": row["bot_response"] or ""})
 
         return his
-
 
     def _clear_chat_history(self, user: User) -> None:
         if not os.path.isfile(self.CSV_FILE):

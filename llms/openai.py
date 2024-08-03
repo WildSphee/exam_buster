@@ -10,15 +10,15 @@ from .prompt import default_chatbot_prompt
 load_dotenv()
 
 
-def call_openai(query: List[Dict[str, str]], user: User, prompt: str = default_chatbot_prompt) -> str:
+def call_openai(
+    query: List[Dict[str, str]], user: User, prompt: str = default_chatbot_prompt
+) -> str:
     client = OpenAI()
 
     messages = [
         {
             "role": "system",
-            "content": prompt.format(
-                username=user.name or "<not provided>"
-            ),
+            "content": prompt.format(username=user.name or "<not provided>"),
         },
     ] + query
 

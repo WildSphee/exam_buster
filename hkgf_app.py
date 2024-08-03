@@ -13,9 +13,9 @@ from telegram.ext import (
     filters,
 )
 
+from db import DB
 from llms.openai import call_openai
 from llms.prompt import hkgf_prompt
-from db import DB
 
 load_dotenv()
 
@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 async def start_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued and log user info. also clears context"""
     user: User = update.message.from_user
-    bot_response: str = f"hello❤❤ 你今日過得點呀~"
+    bot_response: str = "hello❤❤ 你今日過得點呀~"
     db._log_interaction(user, "/start", bot_response)
 
     # clears context
@@ -78,7 +78,9 @@ async def echo(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
 def main() -> None:
     """Start the bot."""
     if TOKEN is None:
-        logger.error("No token found. Please set TELEGRAM_GF_BOT_TOKEN in your .env file.")
+        logger.error(
+            "No token found. Please set TELEGRAM_GF_BOT_TOKEN in your .env file."
+        )
         return
 
     application = ApplicationBuilder().token(TOKEN).build()

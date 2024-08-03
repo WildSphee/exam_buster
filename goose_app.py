@@ -11,8 +11,8 @@ from telegram.ext import (
     filters,
 )
 
-from llms.openai import call_openai
 from db import DB
+from llms.openai import call_openai
 
 load_dotenv()
 
