@@ -16,7 +16,7 @@ OPENAI_API_KEY=<openai key, starts with 'sk'>
 ```
 to start the server:
 ```py
-python3 app.py
+python3 goose_app.py
 ```
 
 # Development
