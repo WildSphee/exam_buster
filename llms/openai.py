@@ -18,7 +18,7 @@ def call_openai(
     messages = [
         {
             "role": "system",
-            "content": prompt.format(username=user.name or "<not provided>"),
+            "content": prompt.format(username=user.first_name or "<not provided>"),
         },
     ] + query
 

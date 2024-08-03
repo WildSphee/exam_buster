@@ -54,7 +54,7 @@ async def help_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def clear_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     """Clear the username in the chat history."""
-    bot_response: str = "Context cleared"
+    bot_response: str = "hello❤❤ 你今日過得點呀~"
     user: User = update.message.from_user
     db._log_interaction(user, "/clear", bot_response)
     db._clear_chat_history(user)
@@ -86,7 +86,7 @@ def main() -> None:
     application = ApplicationBuilder().token(TOKEN).build()
 
     # Add commands
-    application.add_handler(CommandHandler("/start", start_command))
+    application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("clear", clear_command))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
