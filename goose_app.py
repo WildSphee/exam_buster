@@ -11,8 +11,8 @@ from telegram.ext import (
     filters,
 )
 
-from chatbots.openai import call_openai
-from db import _clear_chat_history, _get_chat_history, _log_interaction
+from llms.openai import call_openai
+from db import DB
 
 load_dotenv()
 
@@ -21,6 +21,7 @@ TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 keyboard = [[KeyboardButton("/clear")]]
 reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
+db = DB("chat_history/user_data.csv")
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -34,7 +35,7 @@ async def help_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     bot_response: str = "This is a simple telegram chatbot, type anything to start! /clear to clear context!"
 
     user: User = update.message.from_user
-    _log_interaction(user, user_message, bot_response)
+    db._log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response)
 
 
@@ -43,8 +44,8 @@ async def clear_command(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     user_message: str = update.message.text
     bot_response: str = "Context cleared"
     user: User = update.message.from_user
-    _log_interaction(user, user_message, bot_response)
-    _clear_chat_history(user)
+    db._log_interaction(user, user_message, bot_response)
+    db._clear_chat_history(user)
 
     await update.message.reply_text(bot_response)
 
@@ -54,11 +55,11 @@ async def echo(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     user: User = update.message.from_user
     user_message: str = update.message.text
 
-    chat_history = _get_chat_history(str(user.id))
+    chat_history = db._get_chat_history(str(user.id))
     chat_history.append({"role": "user", "content": user_message})
     bot_response: str = call_openai(chat_history, user)
 
-    _log_interaction(user, user_message, bot_response)
+    db._log_interaction(user, user_message, bot_response)
     await update.message.reply_text(bot_response, reply_markup=reply_markup)
 
 
